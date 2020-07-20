@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, TextInput, TouchableOpacity } from 'react-native'
+import { Text, View, TextInput, TouchableOpacity, Alert } from 'react-native'
 import styles from './styles';
 
 export default class CountryFormScreen extends Component {
@@ -16,7 +16,13 @@ export default class CountryFormScreen extends Component {
 
     async _onSubmit() {
         await this.getCountryData();
-        this.props.navigation.navigate("CountryDetailScreen");
+        const arrCountryData = this.props.arrCountryData;
+        if(arrCountryData.length > 0) {
+            this.props.navigation.navigate("CountryDetailScreen");
+        }
+        else {
+            Alert.alert("Data not found.")
+        }
     }
 
     render() {
